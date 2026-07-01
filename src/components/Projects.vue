@@ -15,7 +15,7 @@
     <!-- Project grid -->
     <div class="project-grid">
       <div
-        v-for="(project, idx) in filteredProjects"
+        v-for="(project, idx) in visibleProjects"
         :key="project.title + idx"
         class="project-card"
       >
@@ -58,6 +58,13 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Show more/less toggle -->
+    <div v-if="filteredProjects.length > 2" class="toggle-wrap">
+      <button class="toggle-btn" @click="showAll = !showAll">
+        {{ showAll ? '▲ Show Less' : '▼ Show All (' + filteredProjects.length + ')' }}
+      </button>
     </div>
 
     <p v-if="filteredProjects.length === 0" class="no-results">No projects match this category.</p>
@@ -106,6 +113,7 @@ const categories = ['All', 'Front-End Apps', 'eLearning Modules', 'Interactive T
 // ── State ──
 const activeFilter = ref('All');
 const activeDemoUrl = ref(null);
+const showAll = ref(false);
 
 // ── Image path resolution (Vite glob for screenshot assets) ──
 const screenshotAssets = import.meta.glob('../assets/images/screenshot/*.{png,jpg,jpeg,PNG,JPG,JPEG}', {
@@ -158,6 +166,11 @@ const allProjects = projectsData.map(normalizeProject)
 const filteredProjects = computed(() => {
   if (activeFilter.value === 'All') return allProjects
   return allProjects.filter(p => categoryMap[p.title] === activeFilter.value)
+})
+
+const visibleProjects = computed(() => {
+  if (showAll.value) return filteredProjects.value
+  return filteredProjects.value.slice(0, 2)
 })
 
 // ── Helpers ──
@@ -372,6 +385,30 @@ const closeDemo = () => {
   color: var(--text-light);
   font-size: 0.95rem;
   margin-top: 40px;
+}
+
+/* ── Toggle ── */
+.toggle-wrap {
+  text-align: center;
+  margin-top: 32px;
+}
+.toggle-btn {
+  padding: 11px 32px;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  box-shadow: var(--shadow-sm);
+}
+.toggle-btn:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
 }
 
 /* ── Modal ── */
