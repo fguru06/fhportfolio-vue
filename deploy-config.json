@@ -1,0 +1,7 @@
+{
+  "productionRepo": "fguru06/portfolio-vue-production",
+  "remote": "production",
+  "branch": "gh-pages",
+  "sourceDir": "dist",
+  "notes": "Run 'npm run deploy' to build and push to the production repo's gh-pages branch for GitHub Pages hosting."
+}

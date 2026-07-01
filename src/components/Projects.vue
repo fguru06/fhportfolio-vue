@@ -1,146 +1,86 @@
 <template>
-  <section id="projects" class="section" aria-label="Projects">
-    <div class="section-heading">
-      <h2>My Projects</h2>
-      <hr />
+  <section id="projects" class="section">
+    <h2 class="section-title">All Projects</h2>
+
+    <!-- Category filters -->
+    <div class="filter-bar">
+      <button
+        v-for="cat in categories"
+        :key="cat"
+        :class="['filter-btn', { active: activeFilter === cat }]"
+        @click="activeFilter = cat"
+      >{{ cat }}</button>
     </div>
 
-    <div
-      v-for="(project, idx) in projects"
-      :key="project.title + idx"
-      class="card mb-4 p-3 reveal"
-      tabindex="0"
-      :aria-label="`Project: ${project.title}`"
-    >
-      <div class="row g-0 align-items-center flex-column flex-md-row">
-        <div class="col-12 col-md-5 text-center mb-3 mb-md-0">
-          <!-- Carousel when multiple images -->
-          <div v-if="project.images && project.images.length > 1" :id="`carousel-${idx}`" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div v-for="(img, i) in project.images" :key="i" :class="['carousel-item', { active: i === 0 }]">
-                <img :src="img" :alt="`${project.title} image ${i+1}`" class="d-block w-100 project-img" loading="lazy" />
-              </div>
-            </div>
+    <!-- Toggle button -->
+    <div class="toggle-wrap">
+      <button class="toggle-btn" @click="showAll = !showAll">
+        {{ showAll ? '▲ Hide' : '▼ Show' }} All Projects ({{ filteredProjects.length }})
+      </button>
+    </div>
 
-            <!-- Indicators -->
-            <div class="carousel-indicators mt-2">
-              <button v-for="(img, i) in project.images" :key="i" type="button" :data-bs-target="`#carousel-${idx}`" :data-bs-slide-to="i" :class="{ active: i === 0 }" :aria-current="i === 0 ? 'true' : undefined" :aria-label="`Slide ${i+1}`"></button>
-            </div>
-
-            <button class="carousel-control-prev" type="button" :data-bs-target="`#carousel-${idx}`" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" :data-bs-target="`#carousel-${idx}`" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-
-            <!-- Thumbnails -->
-            <div class="d-flex gap-2 mt-3 justify-content-center thumb-strip">
-              <img v-for="(img, i) in project.images" :key="i" :src="img" :alt="`thumb ${i+1}`" class="thumb-img" loading="lazy" @click="() => { const c = document.getElementById(`carousel-${idx}`); if(c) new bootstrap.Carousel(c).to(i) }" />
-            </div>
-          </div>
-
-          <!-- Single image fallback -->
-          <img v-else-if="project.images && project.images.length === 1" :src="project.images[0]" :alt="project.title" class="img-fluid project-img" />
-          <!-- No image placeholder -->
-          <div v-else class="project-img-placeholder">No image</div>
-        </div>
-
-        <div class="col-12 col-md-7">
-          <div class="project-content px-3">
-            <h4 class="title-with-bar project-title">
-              <span class="bar project-title-bar" aria-hidden="true"></span>
-              {{ project.title }}
-            </h4>
-            <p class="project-desc">{{ project.description }}</p>
-            <div class="mb-2">
-              <span
-                v-for="tag in project.tech || []"
-                :key="tag"
-                class="badge rounded-pill bg-light text-primary me-2 mb-1 project-tag"
-                :aria-label="`Tag: ${tag}`"
-                >{{ tag }}</span
-              >
-            </div>
-            <div>
-              <button
-                v-if="project.demo"
-                class="btn btn-outline-primary me-2"
-                aria-label="View Demo"
-                tabindex="0"
-                @click="openDemoModal(project.demo)"
-              >
-                View Demo
-              </button>
-
-              <button
-                v-if="project.details"
-                class="btn btn-outline-secondary"
-                aria-label="Details"
-                tabindex="0"
-                @click="openDetails(project.details)"
-              >
-                Details
-              </button>
-            </div>
+    <!-- Project grid (collapsible) -->
+    <transition name="fade">
+      <div v-if="showAll" class="project-grid">
+        <div
+          v-for="(project, idx) in filteredProjects"
+          :key="project.title + idx"
+          class="project-card"
+        >
+          <span class="project-card-category">{{ categoryMap[project.title] || 'Other' }}</span>
+          <h3 class="project-card-title">{{ project.title }}</h3>
+          <p class="project-card-desc">{{ truncateDesc(project.description) }}</p>
+          <p v-if="project.tech && project.tech.length" class="project-card-tech">
+            <strong>Tech:</strong> {{ project.tech.slice(0, 5).join(', ') }}
+          </p>
+          <div class="project-card-actions">
+            <a
+              v-if="project.demo"
+              :href="project.demo"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-btn"
+            >View Demo</a>
           </div>
         </div>
       </div>
-    </div>
+    </transition>
 
-    <!-- Demo Modal -->
-    <Teleport to="body">
-      <div v-if="activeDemoUrl" class="modal-overlay" @click.self="closeDemoModal">
-        <div class="modal-container">
-          <button class="close-btn" @click="closeDemoModal" aria-label="Close demo">&times;</button>
-          <iframe :src="activeDemoUrl" class="demo-frame" title="Project Demo"></iframe>
-        </div>
-      </div>
-    </Teleport>
+    <p v-if="showAll && filteredProjects.length === 0" class="no-results">No projects match this category.</p>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, computed } from 'vue'
 import projectsData from '../data/projects.json'
 
-const staticAssetMap = import.meta.glob('../assets/**/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,avif,AVIF,gif,GIF,svg,SVG,mp4,MP4,webm,WEBM,ogg,OGG,mp3,MP3,pdf,PDF,json,JSON,woff,WOFF,woff2,WOFF2,ttf,TTF}', {
-  eager: true,
-  import: 'default'
-})
+// ── Category mapping ──
+const categoryMap = {
+  'Emergency Department Health Information Systems': 'eLearning Modules',
+  'Interactive Human Body with Hotspots & Quiz': 'eLearning Modules',
+  'AutoTech Logic Engine': 'eLearning Modules',
+  'Cybersecurity Module for Corporate Training': 'eLearning Modules',
+  'Knee Replacement Procedure Flow': 'eLearning Modules',
+  'Scenario-Based Decision Tree': 'eLearning Modules',
+  'Scenario-Based Activity': 'eLearning Modules',
+  'Interactive Flashcard Health Learning Tool': 'Interactive Tools',
+  'Likert Scale Health Survey Interactive': 'Interactive Tools',
+  'Peer Evaluation (Self & Peer with Analytics)': 'Interactive Tools',
+  'Complex Survey Activity': 'Interactive Tools',
+  'Interactive Maps': 'Interactive Tools',
+  'Interactive Presentation': 'Interactive Tools',
+  'Drag-and-Drop Activity': 'Interactive Tools',
+  'Printable PDF Functionality for LMS': 'Front-End Apps',
+  'Custom LMS Themes': 'Front-End Apps'
+};
 
-const assetMap = { ...staticAssetMap }
+const categories = ['All', 'Front-End Apps', 'eLearning Modules', 'Interactive Tools'];
 
-const resolveMediaPath = (value) => {
-  if (!value) return value
-  if (typeof value !== 'string') return value
-  if (/^https?:\/\//i.test(value)) return value
+// ── State ──
+const showAll = ref(false);
+const activeFilter = ref('All');
 
-  let normalized = value.replace(/^\/+/, '')
-  if (normalized.startsWith('src/')) normalized = normalized.replace(/^src\//, '')
-
-  const candidates = []
-
-  if (normalized.startsWith('assets/')) {
-    const withoutPrefix = normalized.replace(/^assets\//, '')
-    candidates.push(`../assets/${withoutPrefix}`)
-    candidates.push(`../${normalized}`)
-  } else {
-    candidates.push(`../assets/${normalized}`)
-    candidates.push(`../${normalized}`)
-  }
-
-  for (const key of candidates) {
-    if (assetMap[key]) {
-      return assetMap[key]
-    }
-  }
-
-  return value
-}
-
+// ── Path resolution ──
 const resolveInteractivePath = (value) => {
   if (!value) return value
   if (typeof value !== 'string') return value
@@ -160,316 +100,192 @@ const resolveInteractivePath = (value) => {
 
 const normalizeProject = (project) => {
   const normalized = { ...project }
-  if (Array.isArray(project.images)) {
-    normalized.images = project.images.map((img) => resolveMediaPath(img)).filter(Boolean)
-  }
-  if (project.video) {
-    normalized.video = resolveMediaPath(project.video)
-  }
   if (project.demo) {
     normalized.demo = resolveInteractivePath(project.demo)
-  }
-  if (project.details) {
-    const isHtml = typeof project.details === 'string' && /\.html?$/i.test(project.details)
-    normalized.details = isHtml ? resolveInteractivePath(project.details) : resolveMediaPath(project.details)
   }
   return normalized
 }
 
-const projects = ref(projectsData.map(normalizeProject))
+const allProjects = projectsData.map(normalizeProject)
 
-const activeDemoUrl = ref('')
-
-function openDemoModal(url) {
-  activeDemoUrl.value = url
-  document.body.style.overflow = 'hidden' // Prevent scrolling
-}
-
-function closeDemoModal() {
-  activeDemoUrl.value = ''
-  document.body.style.overflow = ''
-}
-
-function openDetails(detailsUrl) {
-  window.open(detailsUrl, '_blank')
-}
-
-// Sync thumbnail active state with Bootstrap carousel slide events
-onMounted(async () => {
-  await nextTick()
-  projects.value.forEach((p, idx) => {
-    const carousel = document.getElementById(`carousel-${idx}`)
-    if (!carousel) return
-
-    // set initial active thumb
-    const card = carousel.closest('.card')
-    if (card) {
-      const thumbs = card.querySelectorAll('.thumb-img')
-      thumbs.forEach((t, i) => t.classList.toggle('thumb-active', i === 0))
-    }
-
-    carousel.addEventListener('slid.bs.carousel', () => {
-      const card = carousel.closest('.card')
-      if (!card) return
-      const items = carousel.querySelectorAll('.carousel-item')
-      let activeIndex = 0
-      items.forEach((it, i) => {
-        if (it.classList.contains('active')) activeIndex = i
-      })
-      const thumbs = card.querySelectorAll('.thumb-img')
-      thumbs.forEach((t, i) => t.classList.toggle('thumb-active', i === activeIndex))
-    })
-  })
+// ── Computed ──
+const filteredProjects = computed(() => {
+  if (activeFilter.value === 'All') return allProjects
+  return allProjects.filter(p => categoryMap[p.title] === activeFilter.value)
 })
+
+// ── Helpers ──
+const truncateDesc = (desc) => {
+  if (!desc) return ''
+  return desc.length > 140 ? desc.slice(0, 140).trimEnd() + '…' : desc
+}
 </script>
 
 <style scoped>
-.card {
-  background: rgba(255, 255, 255, 0.94);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  box-shadow: var(--shadow-sm);
-  padding: clamp(2rem, 3vw, 2.4rem) !important;
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 20px;
 }
-
-.project-img {
-  width: 100%;
-  height: 320px;
-  object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
-}
-
-.project-content {
-  padding-top: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-}
-
-.project-title {
-  font-size: clamp(1.35rem, 2vw, 1.65rem);
-  font-weight: 700;
-  color: var(--color-heading);
-}
-
-.project-title .bar.project-title-bar {
-  width: 6px;
-  height: 32px;
-  margin-right: 0.6rem;
-  border-radius: 999px;
-  background: var(--gradient-primary);
-  box-shadow: 0 10px 20px rgba(76, 111, 255, 0.25);
-}
-
-.project-desc {
-  color: var(--color-text-muted);
-  line-height: 1.7;
-  margin-bottom: 0;
-}
-
-.project-tag {
-  background: rgba(76, 111, 255, 0.14);
-  color: var(--color-heading);
-  border: none;
-  padding: 0.45rem 0.9rem;
-  margin-right: 0.35rem;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-  width: 3.15rem;
-  height: 3.15rem;
-  top: 40%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 50%;
-  border: 1px solid rgba(76, 111, 255, 0.18);
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18);
-  transition: transform 160ms ease, box-shadow 180ms ease, background 180ms ease;
-}
-
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-  transform: translateY(-50%) scale(1.04);
-  background: rgba(76, 111, 255, 0.15);
-  box-shadow: 0 18px 32px rgba(76, 111, 255, 0.28);
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  filter: invert(27%) sepia(89%) saturate(5089%) hue-rotate(226deg) brightness(96%) contrast(92%);
-}
-
-.btn-outline-secondary {
-  border-radius: 999px;
-  border: 1.5px solid rgba(15, 23, 42, 0.16);
-  color: var(--color-heading);
-  background: transparent;
-  transition: transform 160ms ease, box-shadow 200ms ease, border-color 200ms ease;
-}
-
-.btn-outline-secondary:hover,
-.btn-outline-secondary:focus {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.16);
-  border-color: rgba(76, 111, 255, 0.35);
-}
-
-.project-img-placeholder {
-  width: 100%;
-  height: 320px;
-  background: rgba(247, 249, 255, 0.8);
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(15, 23, 42, 0.35);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-}
-
-.carousel-indicators {
-  gap: 0.55rem;
-  margin-top: 1rem;
-}
-
-.carousel-indicators [data-bs-target] {
-  width: 18px;
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.22);
-  border: none;
-  opacity: 0.65;
-  transition: background 200ms ease, transform 160ms ease, box-shadow 220ms ease, opacity 160ms ease;
-}
-
-.carousel-indicators [data-bs-target]:hover,
-.carousel-indicators [data-bs-target]:focus {
-  opacity: 1;
-  background: rgba(15, 23, 42, 0.32);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.16);
-}
-
-.carousel-indicators .active {
-  opacity: 1;
-  background: linear-gradient(135deg, rgba(79, 70, 229, 0.65), rgba(20, 184, 166, 0.65));
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.75),
-    0 10px 24px rgba(79, 70, 229, 0.32);
-}
-
-.thumb-strip {
-  max-width: 420px;
-  margin: 1.2rem auto 0;
-  gap: 0.6rem;
-}
-
-.thumb-img {
-  width: 64px;
-  height: 48px;
-  object-fit: cover;
-  border-radius: 10px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  opacity: 0.85;
-  transition: transform 160ms ease, border-color 180ms ease, opacity 160ms ease;
-}
-
-.thumb-img:hover {
-  opacity: 1;
-  transform: translateY(-2px);
-}
-
-.thumb-img.thumb-active {
-  border-color: var(--color-primary);
-  box-shadow: 0 12px 24px rgba(76, 111, 255, 0.2);
-  opacity: 1;
-}
-
-@media (max-width: 992px) {
-  .project-img {
-    height: 260px;
-  }
-  .card {
-    padding: 1.75rem !important;
-  }
-}
-
-@media (max-width: 576px) {
-  .project-img {
-    height: 220px;
-  }
-}
-
-/* Modal Styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.75);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-  animation: fadeIn 0.2s ease-out;
-}
-
-.modal-container {
-  position: relative;
-  width: 90vw;
-  height: 90vh;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-  animation: slideUp 0.3s ease-out;
-}
-
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.8);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+.section-title {
   font-size: 2rem;
-  line-height: 1;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ── Category filters ── */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.filter-btn {
+  padding: 8px 18px;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-weight: 500;
+}
+.filter-btn:hover {
+  border-color: #007bff;
+  color: #007bff;
+}
+.filter-btn.active {
+  background: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+/* ── Toggle ── */
+.toggle-wrap {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.toggle-btn {
+  padding: 10px 28px;
+  background: #fff;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  font-size: 0.95rem;
   color: #333;
   cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s ease;
+  transition: all 0.15s;
+  font-weight: 500;
+}
+.toggle-btn:hover {
+  border-color: #007bff;
+  color: #007bff;
 }
 
-.close-btn:hover {
+/* ── Grid ── */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.project-card {
   background: #fff;
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
 }
 
-.demo-frame {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
+.project-card-category {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #007bff;
+  background: #e8f0fe;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+  align-self: flex-start;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.project-card-title {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #1a1a1a;
 }
 
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+.project-card-desc {
+  font-size: 0.92rem;
+  color: #555;
+  line-height: 1.55;
+  margin-bottom: 12px;
+  flex: 1;
+}
+
+.project-card-tech {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 14px;
+}
+
+.project-card-actions {
+  margin-top: auto;
+}
+
+.project-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.project-btn:hover {
+  background: #0056b3;
+}
+
+.no-results {
+  text-align: center;
+  color: #999;
+  font-size: 0.95rem;
+  margin-top: 20px;
+}
+
+/* ── Transition ── */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 50px 16px;
+  }
+  .section-title {
+    font-size: 1.6rem;
+  }
+  .filter-bar {
+    gap: 6px;
+  }
+  .filter-btn {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 </style>

@@ -1,103 +1,99 @@
-<script setup>
-import Sidebar from './components/Sidebar.vue';
+﻿<script setup>
 import Navbar from './components/Navbar.vue';
 import Hero from './components/Hero.vue';
 import About from './components/About.vue';
-import Experience from './components/Experience.vue';
+import FeaturedProjects from './components/FeaturedProjects.vue';
 import Projects from './components/Projects.vue';
-import Testimonials from './components/Testimonials.vue';
-import Certifications from './components/Certifications.vue';
 import Contact from './components/Contact.vue';
 import Footer from './components/Footer.vue';
+
+// Skills data
+const skills = [
+  'JavaScript (ES6+)', 'React', 'Vue', 'Node.js', 'HTML5', 'CSS3',
+  'Accessibility (WCAG)', 'Storyline', 'SCORM / xAPI', 'LMS Customization',
+  'Figma', 'Adobe CC'
+];
 </script>
 
 <template>
   <div class="app-layout">
-    <aside class="sidebar-wrapper">
-      <Sidebar />
-    </aside>
-    <main class="main-content-wrapper">
+    <Navbar />
+    <main class="main-content">
       <Hero />
-      <Navbar class="sticky-navbar" />
-      <div class="content-sections">
-        <About />
-        <Experience />
-        <Projects />
-        <Testimonials />
-        <Certifications />
-        <Contact />
-      </div>
-      <Footer />
+      <About />
+
+      <!-- Featured Projects (6 cards from prompt) -->
+      <FeaturedProjects />
+
+      <!-- All Projects -->
+      <Projects />
+
+      <!-- Skills -->
+      <section class="section" id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-list">
+          <span v-for="skill in skills" :key="skill" class="skill-tag">{{ skill }}</span>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <Contact />
     </main>
+    <Footer />
   </div>
 </template>
 
 <style>
-@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css');
 .app-layout {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  background: transparent;
 }
-.sidebar-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 360px;
-  min-width: 340px;
-  max-width: 380px;
-  height: 100vh;
-  padding: 0.5rem 1rem 2rem;
-  box-sizing: border-box;
+.main-content {
+  flex: 1;
+}
+
+/* Section styling */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 20px;
+}
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  text-align: center;
+  color: var(--text);
+}
+
+/* Skills tags */
+.skills-list {
   display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
   justify-content: center;
-  background: transparent;
 }
-.main-content-wrapper {
-  margin-left: 360px;
-  width: calc(100% - 360px);
-  padding: 0 3rem;
-  box-sizing: border-box;
+.skill-tag {
+  background: #e8eef7;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: var(--text);
 }
-.main-content-wrapper > *:first-child {
-  margin-top: 0;
-}
-.content-sections {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-@media (max-width: 1100px) {
-  .sidebar-wrapper {
-    width: 300px;
-    min-width: 0;
-    max-width: none;
-    margin-left: 0;
-    padding: 1.35rem 1rem 1.85rem;
+
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 16px;
   }
-  .main-content-wrapper {
-    margin-left: 300px;
-    width: calc(100% - 300px);
-    padding: 0 2.5rem;
+  .section-title {
+    font-size: 1.6rem;
   }
-}
-@media (max-width: 992px) {
-  .app-layout {
-    flex-direction: column;
+  .skills-list {
+    gap: 8px;
   }
-  .sidebar-wrapper {
-    position: static;
-    width: 100%;
-    max-width: none;
-    height: auto;
-    padding: 1.75rem 1.5rem 0;
-  }
-  .main-content-wrapper {
-    margin-left: 0;
-    width: 100%;
-    padding: 0 1.25rem 2rem;
-  }
-  .content-sections {
-    padding-top: 2rem;
+  .skill-tag {
+    padding: 8px 12px;
+    font-size: 0.85rem;
   }
 }
 </style>

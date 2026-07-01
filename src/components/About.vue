@@ -1,54 +1,59 @@
 <template>
-  <section id="about" class="section" aria-label="About Me">
-    <div class="section-heading">
-      <h2>About Me</h2>
-      <hr />
-    </div>
-    <div class="card reveal" tabindex="0">
-      <div class="about-content">
-        <p>
-          I'm a highly motivated and results-oriented front-end and eLearning developer with 10+ years of cutting-edge experience designing, developing, and maintaining engaging and accessible learning experiences.
-        </p>
-        <p>
-          I have a proven ability to create interactive, mobile-first, and responsive multimedia content that seamlessly integrates with university and college course curricula. I'm adept at collaborating with instructional designers and creative teams to deliver impactful eLearning solutions.
-        </p>
-        <p>
-          In addition to my eLearning expertise, I have 4 years of extensive experience in front-end development. I have developed numerous web-based responsive and accessible applications using modern technologies such as HTML5, CSS3, JavaScript, Vue.js, and React.js. My work includes creating user-friendly interfaces, optimizing performance, and ensuring cross-browser compatibility.
-        </p>
-        <p>
-          Passionate about staying at the forefront of the ever-evolving eLearning and front-end development landscape, I'm eager to contribute to innovative projects and am open to new opportunities and collaborations.
-        </p>
-      </div>
+  <section id="about" class="section">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-card">
+      <p>
+        I'm Fareed Hassan — a Front-End Developer and eLearning Specialist with 10+ years building interactive learning modules,
+        custom LMS experiences, and modern web applications. I combine front-end engineering (React, Vue, JavaScript)
+        with instructional design and multimedia development to create engaging, accessible, and scalable digital learning products.
+      </p>
     </div>
   </section>
 </template>
 
 <script setup>
-// No logic needed for static about section
+// Static about section
 </script>
 
 <style scoped>
-.card {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  padding: clamp(2rem, 3vw, 2.75rem);
-  max-width: 860px;
+.section {
+  max-width: 1100px;
   margin: 0 auto;
-  box-shadow: var(--shadow-sm);
+  padding: 80px 20px;
 }
-
-.about-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.15rem;
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.about-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.about-card p {
   font-size: 1.05rem;
-  color: var(--color-text-muted);
+  color: #555;
+  line-height: 1.7;
+  margin: 0;
 }
 
-.about-content p {
-  margin: 0;
-  line-height: 1.7;
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 16px;
+  }
+  .section-title {
+    font-size: 1.6rem;
+  }
+  .about-card {
+    padding: 20px;
+  }
+  .about-card p {
+    font-size: 0.95rem;
+  }
 }
 </style>
 ```

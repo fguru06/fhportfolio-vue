@@ -24,6 +24,20 @@
 <script setup>
 const jobs = [
   {
+    company: 'MEDIASURF TECHNOLOGIES, WATERLOO, ON',
+    title: 'Independent Consultant – eLearning & Front‑End Engineering',
+    date: 'Mar 2025 - Present',
+    description: 'MediaSurf (mediasurf.ca) operates as a boutique digital learning studio where I provide consulting services in eLearning development, front‑end engineering, and interactive content design. I partner with organizations to elevate their learning experiences through modern web technologies, clean UX, and high‑impact instructional design.',
+    bullets: [
+      'Build custom HTML5, CSS3, JavaScript, Vue.js, and React components for interactive learning experiences.',
+      'Design scenario‑based activities, simulations, and responsive UI systems for LMS and LXP environments.',
+      'Modernize legacy courses and support digital transformation initiatives for academic and corporate teams.',
+      'Deliver full project lifecycle support—from concept, wireframes, and prototypes to polished deployment.',
+      'Enhance accessibility (WCAG), usability, and visual design across learning products and platforms.',
+      'Collaborate with instructional designers, SMEs, and stakeholders to create engaging, measurable learning outcomes.'
+    ]
+  },
+  {
     company: 'KEYPATH EDUCATION, TORONTO, ON',
     title: 'Front End Web Developer',
     date: 'April 2021 - Feb 2025',
