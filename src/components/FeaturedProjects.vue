@@ -8,8 +8,8 @@
         :key="project.title"
         class="featured-card"
       >
-        <div class="featured-thumb" :style="{ background: project.gradient }">
-          <span class="thumb-letter">{{ project.initial }}</span>
+        <div class="featured-thumb">
+          <img :src="project.image" :alt="project.title" loading="lazy" />
         </div>
         <div class="featured-body">
           <h3>{{ project.title }}</h3>
@@ -35,32 +35,28 @@ const featured = [
     description: 'Modern Vue.js + Node app for generating structured learning content using AI.',
     tech: ['Vue.js', 'Node.js', 'Firebase', 'AI Integration'],
     url: 'https://learncraft.mediasurf.ca',
-    gradient: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-    initial: 'L'
+    image: new URL('../assets/images/screenshot/learncraft.png', import.meta.url).href
   },
   {
     title: 'Pitstop — Automotive Diagnostic App',
     description: 'Vue.js-powered diagnostic tool with clean UI and real-world automotive workflows.',
     tech: ['Vue.js', 'JavaScript'],
     url: 'https://pitstop.mediasurf.ca',
-    gradient: 'linear-gradient(135deg, #f59e0b, #ef4444)',
-    initial: 'P'
+    image: new URL('../assets/images/screenshot/pitstop.png', import.meta.url).href
   },
   {
     title: 'AI Prompt Prototyper',
     description: 'Lightweight tool for building and testing structured AI prompts.',
     tech: ['Vue.js', 'JavaScript'],
     url: 'https://pp-ai-tool.mediasurf.ca',
-    gradient: 'linear-gradient(135deg, #10b981, #06b6d4)',
-    initial: 'A'
+    image: new URL('../assets/images/screenshot/prompt-prototyper.png', import.meta.url).href
   },
   {
     title: 'Emergency Department HIS Module',
     description: 'Interactive hospital information system training with workflow simulation.',
     tech: ['Storyline', 'JavaScript'],
     url: null,
-    gradient: 'linear-gradient(135deg, #ec4899, #f43f5e)',
-    initial: 'E'
+    image: new URL('../assets/images/screenshot/mc1.png', import.meta.url).href
   }
 ];
 </script>
@@ -99,17 +95,19 @@ const featured = [
 }
 
 .featured-thumb {
-  height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 200px;
+  overflow: hidden;
+  background: #f1f5f9;
 }
-.thumb-letter {
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: rgba(255,255,255,0.9);
-  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  letter-spacing: -0.02em;
+.featured-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+.featured-card:hover .featured-thumb img {
+  transform: scale(1.05);
 }
 
 .featured-body {
@@ -139,7 +137,6 @@ const featured = [
   font-weight: 600;
   color: var(--accent);
   text-decoration: none;
-  transition: gap 0.2s;
 }
 .featured-link:hover {
   text-decoration: underline;
@@ -149,6 +146,6 @@ const featured = [
   .section { padding: 50px 16px; }
   .section-title { font-size: 1.5rem; }
   .featured-grid { grid-template-columns: 1fr; gap: 20px; }
-  .featured-thumb { height: 140px; }
+  .featured-thumb { height: 180px; }
 }
 </style>
