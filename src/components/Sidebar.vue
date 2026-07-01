@@ -340,8 +340,49 @@ function toggleAccordion(name) {
 }
 
 .download-cv .btn-primary {
+  position: relative;
   width: 100%;
   padding: 0.85rem 0;
+  background: linear-gradient(135deg, #2563eb, #4f46e5) !important;
+  border: none !important;
+  overflow: hidden;
+  isolation: isolate;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.download-cv .btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1d4ed8, #4338ca);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: -1;
+  border-radius: inherit;
+}
+.download-cv .btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: rotate(25deg);
+  transition: left 0.6s ease;
+  z-index: -1;
+}
+.download-cv .btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.4);
+}
+.download-cv .btn-primary:hover::before {
+  opacity: 1;
+}
+.download-cv .btn-primary:hover::after {
+  left: 120%;
+}
+.download-cv .btn-primary:active {
+  transform: translateY(-1px) scale(0.98);
 }
 
 .sidebar .accordion-button {

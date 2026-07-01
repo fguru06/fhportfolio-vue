@@ -110,16 +110,53 @@ export default {
   gap: 1em;
 }
 .btn {
-  background: #3a6ee8;
+  position: relative;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
   color: #fff;
   border: none;
   border-radius: 8px;
   padding: 0.7em 1.5em;
   font-size: 1em;
   cursor: pointer;
-  transition: background 0.2s;
+  overflow: hidden;
+  isolation: isolate;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.25);
+  font-family: inherit;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1d4ed8, #4338ca);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: -1;
+  border-radius: inherit;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: rotate(25deg);
+  transition: left 0.6s ease;
+  z-index: -1;
 }
 .btn:hover {
-  background: #2456b6;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.4);
+}
+.btn:hover::before {
+  opacity: 1;
+}
+.btn:hover::after {
+  left: 120%;
+}
+.btn:active {
+  transform: translateY(-1px) scale(0.98);
 }
 </style>

@@ -146,18 +146,49 @@ onUnmounted(() => {
   margin-left: 8px;
 }
 .nav-cta {
+  position: relative;
   background: linear-gradient(135deg, #2563eb, #4f46e5) !important;
   color: #fff !important;
   padding: 8px 20px !important;
   border-radius: 8px !important;
   font-weight: 600 !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+.nav-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1d4ed8, #4338ca);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  border-radius: inherit;
+}
+.nav-cta::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: rotate(25deg);
+  transition: left 0.6s ease;
+  z-index: -1;
 }
 .nav-cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
-  background: linear-gradient(135deg, #2563eb, #4f46e5) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4) !important;
   color: #fff !important;
+}
+.nav-cta:hover::before {
+  opacity: 1;
+}
+.nav-cta:hover::after {
+  left: 120%;
 }
 
 /* ── Hamburger ── */
