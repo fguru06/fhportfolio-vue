@@ -44,7 +44,7 @@ const certifications = [
   { title: 'Learning Vue.js', issuer: 'LinkedIn Learning', date: 'March 2022' },
   { title: 'Unconscious Bias', issuer: 'LinkedIn Learning', date: 'February 2022' },
   { title: 'Confronting Bias: Thriving Across Our Differences', issuer: 'LinkedIn Learning', date: 'February 2022' },
-  { title: "React.js Essential Training", issuer: 'LinkedIn Learning', date: 'December 2020' },
+  { title: "Vue.js Essential Training", issuer: 'LinkedIn Learning', date: 'December 2020' },
 ]
 
 onMounted(() => {
