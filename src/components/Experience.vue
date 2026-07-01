@@ -29,7 +29,7 @@ const jobs = [
     date: 'Mar 2025 - Present',
     description: 'MediaSurf (mediasurf.ca) operates as a boutique digital learning studio where I provide consulting services in eLearning development, front‑end engineering, and interactive content design. I partner with organizations to elevate their learning experiences through modern web technologies, clean UX, and high‑impact instructional design.',
     bullets: [
-      'Build custom HTML5, CSS3, JavaScript, Vue.js, and React components for interactive learning experiences.',
+      'Build custom HTML5, CSS3, JavaScript, and Vue.js components for interactive learning experiences.',
       'Design scenario‑based activities, simulations, and responsive UI systems for LMS and LXP environments.',
       'Modernize legacy courses and support digital transformation initiatives for academic and corporate teams.',
       'Deliver full project lifecycle support—from concept, wireframes, and prototypes to polished deployment.',

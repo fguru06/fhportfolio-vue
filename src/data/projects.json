@@ -38,7 +38,7 @@
     "title": "Scenario-Based Decision Tree",
     "description": "Designed a branching decision tree where learners apply soft skills, compliance, leadership, and clinical judgment while navigating choices that surface tailored outcomes, feedback, or consequences. The experience closes with a scored recap that highlights the path taken and knowledge gaps.",
     "images": ["/src/assets/images/Scenario-1.png", "/src/assets/images/Scenario-2.png", "/src/assets/images/Scenario-3.png"],
-    "tech": ["HTML5", "CSS3", "JavaScript", "Vue.js", "React"],
+    "tech": ["HTML5", "CSS3", "JavaScript", "Vue.js"],
     "demo": "interactives/scenario-based/index.html"
   },
   {

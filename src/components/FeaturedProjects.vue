@@ -32,8 +32,8 @@
 const featured = [
   {
     title: 'LearnCraft — AI-Powered Learning Builder',
-    description: 'Modern React + Node app for generating structured learning content using AI.',
-    tech: ['React', 'Node.js', 'Firebase'],
+    description: 'Modern Vue.js + Node app for generating structured learning content using AI.',
+    tech: ['Vue.js', 'Node.js', 'Firebase', 'AI Integration'],
     url: 'https://learncraft.mediasurf.ca',
     gradient: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
     initial: 'L'

@@ -11,9 +11,9 @@ import Footer from './components/Footer.vue';
 
 // Skills data
 const skills = [
-  'JavaScript (ES6+)', 'React', 'Vue.js', 'Node.js', 'HTML5', 'CSS3',
+  'JavaScript (ES6+)', 'Vue.js', 'Node.js', 'HTML5', 'CSS3',
   'Accessibility (WCAG)', 'Storyline', 'SCORM / xAPI', 'LMS Customization',
-  'Figma', 'Adobe CC'
+  'AI-Powered Development', 'GitHub Copilot', 'VS Code', 'Figma', 'Adobe CC'
 ];
 
 // Back to top

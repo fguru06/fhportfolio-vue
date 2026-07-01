@@ -3,8 +3,9 @@
     <h2 class="section-title">Why Hire Me</h2>
     <ul class="why-list">
       <li>10+ years building interactive learning systems for universities &amp; enterprise clients</li>
-      <li>4+ years modern front-end development using React, Vue, and JavaScript</li>
+      <li>4+ years modern front-end development using Vue.js and JavaScript</li>
       <li>Strong UI/UX sense with clean, accessible, mobile-first design</li>
+      <li>AI expert — leveraging Copilot, VS Code & LLMs to accelerate delivery and solve complex problems</li>
       <li>Experience delivering SCORM/xAPI modules and custom LMS solutions</li>
       <li>Blend of engineering + instructional design for high-impact learning products</li>
     </ul>

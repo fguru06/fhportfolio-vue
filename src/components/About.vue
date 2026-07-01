@@ -6,7 +6,7 @@
         I'm <strong>Fareed Hassan</strong> — a Front-End Developer and eLearning Specialist with 10+ years building interactive learning modules, custom LMS experiences, and modern web applications.
       </p>
       <p>
-        I combine <strong>front-end engineering</strong> (React, Vue, JavaScript) with <strong>instructional design</strong> and multimedia development to create engaging, accessible, and scalable digital learning products used by universities, enterprises, and training organizations.
+        I combine <strong>front-end engineering</strong> (Vue.js, JavaScript) with <strong>instructional design</strong> and multimedia development to create engaging, accessible, and scalable digital learning products used by universities, enterprises, and training organizations. I leverage <strong>AI-powered tools</strong> including GitHub Copilot and VS Code to accelerate development, solve complex problems, and deliver high-quality solutions efficiently.
       </p>
     </div>
   </section>
