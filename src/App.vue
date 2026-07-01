@@ -1,4 +1,5 @@
 ﻿<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
 import Navbar from './components/Navbar.vue';
 import Hero from './components/Hero.vue';
 import About from './components/About.vue';
@@ -9,10 +10,43 @@ import Footer from './components/Footer.vue';
 
 // Skills data
 const skills = [
-  'JavaScript (ES6+)', 'React', 'Vue', 'Node.js', 'HTML5', 'CSS3',
+  'JavaScript (ES6+)', 'React', 'Vue.js', 'Node.js', 'HTML5', 'CSS3',
   'Accessibility (WCAG)', 'Storyline', 'SCORM / xAPI', 'LMS Customization',
   'Figma', 'Adobe CC'
 ];
+
+// Back to top
+const showBackToTop = ref(false);
+
+function onScroll() {
+  showBackToTop.value = window.scrollY > 400;
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Reveal animation
+function initReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', onScroll, { passive: true });
+  initReveal();
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll);
+});
 </script>
 
 <template>
@@ -29,8 +63,8 @@ const skills = [
       <Projects />
 
       <!-- Skills -->
-      <section class="section" id="skills">
-        <h2 class="section-title">Skills</h2>
+      <section class="section reveal" id="skills">
+        <h2 class="section-title">Skills &amp; Technologies</h2>
         <div class="skills-list">
           <span v-for="skill in skills" :key="skill" class="skill-tag">{{ skill }}</span>
         </div>
@@ -40,6 +74,14 @@ const skills = [
       <Contact />
     </main>
     <Footer />
+
+    <!-- Back to top -->
+    <button
+      v-show="showBackToTop"
+      class="back-to-top"
+      @click="scrollToTop"
+      aria-label="Back to top"
+    >↑</button>
   </div>
 </template>
 
@@ -60,7 +102,8 @@ const skills = [
   padding: 80px 20px;
 }
 .section-title {
-  font-size: 2rem;
+  font-size: 1.85rem;
+  font-weight: 700;
   margin-bottom: 24px;
   text-align: center;
   color: var(--text);
@@ -74,26 +117,26 @@ const skills = [
   justify-content: center;
 }
 .skill-tag {
-  background: #e8eef7;
-  padding: 10px 16px;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  color: var(--text);
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: default;
+}
+.skill-tag:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
 @media (max-width: 768px) {
-  .section {
-    padding: 40px 16px;
-  }
-  .section-title {
-    font-size: 1.6rem;
-  }
-  .skills-list {
-    gap: 8px;
-  }
-  .skill-tag {
-    padding: 8px 12px;
-    font-size: 0.85rem;
-  }
+  .section { padding: 50px 16px; }
+  .section-title { font-size: 1.5rem; }
+  .skills-list { gap: 8px; }
+  .skill-tag { padding: 8px 14px; font-size: 0.82rem; }
 }
 </style>

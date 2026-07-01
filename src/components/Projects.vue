@@ -142,24 +142,26 @@ const truncateDesc = (desc) => {
   margin-bottom: 24px;
 }
 .filter-btn {
-  padding: 8px 18px;
-  border: 1px solid #d0d5dd;
+  padding: 8px 20px;
+  border: 1.5px solid var(--border);
   background: #fff;
   border-radius: 999px;
-  font-size: 0.9rem;
-  color: #555;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
   cursor: pointer;
-  transition: all 0.15s;
-  font-weight: 500;
+  transition: all 0.2s;
+  font-family: inherit;
 }
 .filter-btn:hover {
-  border-color: #007bff;
-  color: #007bff;
+  border-color: #93c5fd;
+  color: var(--accent);
 }
 .filter-btn.active {
-  background: #007bff;
+  background: var(--accent);
   color: #fff;
-  border-color: #007bff;
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
 }
 
 /* ── Toggle ── */
@@ -168,19 +170,22 @@ const truncateDesc = (desc) => {
   margin-bottom: 28px;
 }
 .toggle-btn {
-  padding: 10px 28px;
+  padding: 11px 32px;
   background: #fff;
-  border: 1px solid #d0d5dd;
+  border: 1.5px solid var(--border);
   border-radius: 8px;
-  font-size: 0.95rem;
-  color: #333;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
   cursor: pointer;
-  transition: all 0.15s;
-  font-weight: 500;
+  transition: all 0.2s;
+  font-family: inherit;
+  box-shadow: var(--shadow-sm);
 }
 .toggle-btn:hover {
-  border-color: #007bff;
-  color: #007bff;
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: var(--shadow);
 }
 
 /* ── Grid ── */
@@ -192,45 +197,54 @@ const truncateDesc = (desc) => {
 
 .project-card {
   background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #e5e5e5;
+  padding: 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
+  transition: all 0.25s;
+  box-shadow: var(--shadow-sm);
+}
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: #93c5fd;
 }
 
 .project-card-category {
   display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 600;
+  font-size: 0.7rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: #007bff;
-  background: #e8f0fe;
-  padding: 3px 10px;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 4px 10px;
   border-radius: 999px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   align-self: flex-start;
 }
 
 .project-card-title {
   margin-top: 0;
-  font-size: 1.1rem;
-  color: #1a1a1a;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
 }
 
 .project-card-desc {
-  font-size: 0.92rem;
-  color: #555;
-  line-height: 1.55;
-  margin-bottom: 12px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 14px;
   flex: 1;
 }
 
 .project-card-tech {
-  font-size: 0.85rem;
-  color: #777;
-  margin-bottom: 14px;
+  font-size: 0.82rem;
+  color: var(--text-light);
+  margin-bottom: 16px;
 }
 
 .project-card-actions {
@@ -239,17 +253,20 @@ const truncateDesc = (desc) => {
 
 .project-btn {
   display: inline-block;
-  padding: 8px 16px;
-  background: #007bff;
+  padding: 9px 18px;
+  background: var(--accent);
   color: #fff;
   text-decoration: none;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: background 0.2s;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 0.2s;
 }
 .project-btn:hover {
-  background: #0056b3;
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  color: #fff;
 }
 
 .no-results {

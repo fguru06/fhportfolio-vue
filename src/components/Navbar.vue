@@ -1,7 +1,10 @@
 ﻿<template>
   <nav class="navbar">
     <div class="navbar-inner">
-      <a href="#" class="navbar-brand">Fareed Hassan</a>
+      <a href="#" class="navbar-brand">
+        <span class="brand-dot"></span>
+        Fareed Hassan
+      </a>
       <ul class="navbar-links">
         <li><a href="#about">About</a></li>
         <li><a href="#featured">Featured</a></li>
@@ -14,17 +17,18 @@
 </template>
 
 <script setup>
-// Clean navbar – no complex logic needed
+// Professional navbar
 </script>
 
 <style scoped>
 .navbar {
-  background: #ffffff;
-  border-bottom: 1px solid #e5e5e5;
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 0 20px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
 }
 .navbar-inner {
   max-width: 1100px;
@@ -32,60 +36,71 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 56px;
+  height: 60px;
+  padding: 0 20px;
 }
 .navbar-brand {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--text);
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.brand-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  display: inline-block;
 }
 .navbar-links {
   list-style: none;
   display: flex;
-  gap: 24px;
+  gap: 28px;
   margin: 0;
   padding: 0;
 }
 .navbar-links a {
-  color: #555;
-  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
   font-weight: 500;
   text-decoration: none;
   transition: color 0.15s;
+  position: relative;
+}
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  transition: width 0.2s;
 }
 .navbar-links a:hover {
-  color: #007bff;
+  color: var(--accent);
 }
-
-/* Mobile hamburger */
-.navbar-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #1a1a1a;
+.navbar-links a:hover::after {
+  width: 100%;
 }
 
 @media (max-width: 768px) {
   .navbar-inner {
     flex-wrap: wrap;
     height: auto;
-    padding: 12px 0;
+    padding: 12px 16px;
+    gap: 8px;
   }
-  .navbar-brand {
-    font-size: 1.05rem;
-  }
+  .navbar-brand { font-size: 1rem; }
   .navbar-links {
-    flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
     width: 100%;
     justify-content: center;
-    padding-top: 8px;
   }
-  .navbar-links a {
-    font-size: 0.85rem;
-  }
+  .navbar-links a { font-size: 0.82rem; }
 }
 </style>
