@@ -20,8 +20,14 @@
             :href="project.url"
             target="_blank"
             rel="noopener noreferrer"
-            class="featured-link"
-          >Visit Project →</a>
+            class="featured-btn"
+          >
+            <span>Visit Project</span>
+            <span class="btn-arrow">→</span>
+          </a>
+          <span v-else class="featured-btn featured-btn-disabled">
+            <span>Coming Soon</span>
+          </span>
         </div>
       </div>
     </div>
@@ -32,28 +38,28 @@
 const featured = [
   {
     title: 'LearnCraft — AI-Powered Learning Builder',
-    description: 'Modern Vue.js + Node app for generating structured learning content using AI.',
+    description: 'LearnCraft is an AI-powered course creation platform that helps instructors and enterprise teams build structured learning content in minutes. It generates course outlines, lessons, quizzes, and learning paths using AI, supported by a clean, intuitive editor and seamless publishing to a branded LMS or marketplace.',
     tech: ['Vue.js', 'Node.js', 'Firebase', 'AI Integration'],
     url: 'https://learncraft.mediasurf.ca',
     image: new URL('../assets/images/screenshot/learncraft.png', import.meta.url).href
   },
   {
     title: 'Pitstop — Automotive Diagnostic App',
-    description: 'Vue.js-powered diagnostic tool with clean UI and real-world automotive workflows.',
+    description: 'Pitstop is a modern automotive service platform that connects drivers with certified mechanics in minutes. It offers guided diagnostics, instant matching with trusted technicians, appointment booking, and a mobile-first interface for managing repairs and bids — all built with a clean, responsive Vue.js front end.',
     tech: ['Vue.js', 'JavaScript'],
     url: 'https://pitstop.mediasurf.ca',
     image: new URL('../assets/images/screenshot/pitstop.png', import.meta.url).href
   },
   {
-    title: 'AI Prompt Prototyper',
-    description: 'Lightweight tool for building and testing structured AI prompts.',
+    title: 'AI Slide Prototyper',
+    description: 'AI Slide Prototyper is an intelligent presentation builder that transforms ideas into interactive learning experiences. It lets creators design drag‑and‑drop slides, branching paths, quizzes, and games — all powered by AI for fast iteration and creative freedom. Built for educators, trainers, and teams who want presentations that feel alive and adaptive.',
     tech: ['Vue.js', 'JavaScript'],
     url: 'https://pp-ai-tool.mediasurf.ca',
     image: new URL('../assets/images/screenshot/prompt-prototyper.png', import.meta.url).href
   },
   {
     title: 'Emergency Department HIS Module',
-    description: 'Interactive hospital information system training with workflow simulation.',
+    description: 'A fully interactive hospital information system training module that simulates Emergency Department workflows. Learners navigate real-world scenarios, make decisions, and follow guided steps through a clean, accessible interface designed for enterprise healthcare training.',
     tech: ['Storyline', 'JavaScript'],
     url: null,
     image: new URL('../assets/images/screenshot/mc1.png', import.meta.url).href
@@ -131,15 +137,102 @@ const featured = [
   color: var(--text-light) !important;
   margin-bottom: 14px !important;
 }
-.featured-link {
-  display: inline-block;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--accent);
+
+/* ── Modern Button ── */
+.featured-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: #fff;
   text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  overflow: hidden;
+  isolation: isolate;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  letter-spacing: 0.3px;
+  animation: btn-glow-pulse 3s ease-in-out infinite;
 }
-.featured-link:hover {
-  text-decoration: underline;
+.featured-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1d4ed8, #4338ca);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: -1;
+}
+.featured-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: rotate(25deg);
+  transition: left 0.6s ease;
+  z-index: -1;
+}
+.featured-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.45);
+  animation: none;
+}
+.featured-btn:hover::before {
+  opacity: 1;
+}
+.featured-btn:hover::after {
+  left: 120%;
+}
+.featured-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+.featured-btn .btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-size: 1.15em;
+  font-weight: 800;
+  line-height: 1;
+}
+.featured-btn:hover .btn-arrow {
+  transform: translateX(5px);
+}
+
+@keyframes btn-glow-pulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3); }
+  50% { box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5); }
+}
+
+.featured-btn-disabled {
+  background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+  color: #475569;
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+  animation: none;
+}
+.featured-btn-disabled::before,
+.featured-btn-disabled::after {
+  display: none;
+}
+.featured-btn-disabled:hover {
+  transform: none;
+  box-shadow: none;
+  background: linear-gradient(135deg, #cbd5e1, #94a3b8);
 }
 
 @media (max-width: 768px) {
