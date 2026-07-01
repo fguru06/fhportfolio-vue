@@ -7,6 +7,7 @@
       </a>
       <ul class="navbar-links">
         <li><a href="#about">About</a></li>
+        <li><a href="#why-hire-me">Why Me</a></li>
         <li><a href="#featured">Featured</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>

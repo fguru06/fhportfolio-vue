@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import Navbar from './components/Navbar.vue';
 import Hero from './components/Hero.vue';
 import About from './components/About.vue';
+import WhyHireMe from './components/WhyHireMe.vue';
 import FeaturedProjects from './components/FeaturedProjects.vue';
 import Projects from './components/Projects.vue';
 import Contact from './components/Contact.vue';
@@ -55,8 +56,9 @@ onUnmounted(() => {
     <main class="main-content">
       <Hero />
       <About />
+      <WhyHireMe />
 
-      <!-- Featured Projects (6 cards from prompt) -->
+      <!-- Featured Projects (4 cards with thumbnails) -->
       <FeaturedProjects />
 
       <!-- All Projects -->
