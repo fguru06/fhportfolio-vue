@@ -2,7 +2,7 @@
   {
     "title": "Emergency Department Health Information Systems",
     "description": "An interactive Emergency Department workflow activity featuring multiple-choice decision points where learners identify and select the correct health information systems used throughout patient care. Each question provides instant feedback with visual indicators for correct and incorrect selections, accompanied by real-time response analytics displayed in dynamic charts. The activity concludes with a comprehensive summary and downloadable PDF results for review.",
-    "images": ["/src/assets/images/screenshot/mc1.png", "/src/assets/images/screenshot/mc2.png", "/src/assets/images/screenshot/mc3.png", "/src/assets/images/screenshot/mc4.png"],
+    "images": ["/images/screenshot/mc1.png", "/images/screenshot/mc2.png", "/images/screenshot/mc3.png", "/images/screenshot/mc4.png"],
     "tech": ["HTML5", "CSS3", "JavaScript", "Vue.js", "Highcharts", "Responsive Design", "Accessibility"],
     "demo": "interactives/multiple-choice/index.html"
   },
@@ -16,28 +16,28 @@
   {
     "title": "AutoTech Logic Engine",
     "description": "An advanced interactive learning module for automotive technology featuring a logic-based diagnostic engine. Learners work through real-world vehicle troubleshooting scenarios, applying technical knowledge to identify problems and select appropriate solutions. The engine provides instant feedback on diagnostic choices, visual system diagrams, and comprehensive analytics tracking learner progress and decision-making patterns.",
-    "images": ["/src/assets/images/screenshot/auto1.png", "/src/assets/images/screenshot/auto2.png", "/src/assets/images/screenshot/auto3.png"],
+    "images": ["/images/screenshot/auto1.png", "/images/screenshot/auto2.png", "/images/screenshot/auto3.png"],
     "tech": ["HTML5", "CSS3", "JavaScript", "Vue.js", "Responsive Design", "Accessibility", "Diagnostic Engine"],
     "demo": "interactives/autotech/index.html"
   },
   {
     "title": "Cybersecurity Module for Corporate Training",
     "description": "An interactive cybersecurity learning module built for corporate training that helps employees identify threats, apply secure practices, and make risk-aware decisions through guided activities and knowledge checks.",
-    "images": ["/src/assets/images/screenshot/cyber1.png", "/src/assets/images/screenshot/cyber2.png", "/src/assets/images/screenshot/cyber3.png"],
+    "images": ["/images/screenshot/cyber1.png", "/images/screenshot/cyber2.png", "/images/screenshot/cyber3.png"],
     "tech": ["HTML5", "CSS3", "JavaScript", "Corporate Training", "Accessibility", "Responsive Design"],
     "demo": "interactives/cybersecurity-module/index.html"
   },
   {
     "title": "Knee Replacement Procedure Flow",
     "description": "A guided knee replacement journey that adapts to the learner's role, shows branching inpatient and outpatient paths, and keeps progress visible with status chips. Each step reveals clinical guidance, expected timelines, and embedded knowledge checks so learners can confirm understanding before moving forward.",
-    "images": ["/src/assets/images/screenshot/knee1.png", "/src/assets/images/screenshot/knee2.png", "/src/assets/images/screenshot/knee3.png"],
+    "images": ["/images/screenshot/knee1.png", "/images/screenshot/knee2.png", "/images/screenshot/knee3.png"],
     "tech": ["HTML5", "CSS3", "JavaScript", "Vue.js", "Responsive Design", "Accessibility"],
     "demo": "interactives/health-timeline/index.html"
   },
   {
     "title": "Scenario-Based Decision Tree",
     "description": "Designed a branching decision tree where learners apply soft skills, compliance, leadership, and clinical judgment while navigating choices that surface tailored outcomes, feedback, or consequences. The experience closes with a scored recap that highlights the path taken and knowledge gaps.",
-    "images": ["/src/assets/images/Scenario-1.png", "/src/assets/images/Scenario-2.png", "/src/assets/images/Scenario-3.png"],
+    "images": ["/images/Scenario-1.png", "/images/Scenario-2.png", "/images/Scenario-3.png"],
     "tech": ["HTML5", "CSS3", "JavaScript", "Vue.js"],
     "demo": "interactives/scenario-based/index.html"
   },
@@ -51,14 +51,14 @@
   {
     "title": "Likert Scale Health Survey Interactive",
     "description": "A Likert scale-based health survey interactive built with modern web technologies. Users can rate statements on a scale, and results are visualized for instant feedback. This interactive supports multiple users, saves data in a database, and displays user averages in a graph for enhanced engagement and analytics. Designed for accessibility and responsive use in educational or healthcare settings.",
-  "images": ["/src/assets/images/Likertsurvey1.png", "/src/assets/images/Likertsurvey2.png"],
+  "images": ["/images/Likertsurvey1.png", "/images/Likertsurvey2.png"],
     "tech": ["HTML5", "CSS3", "JavaScript", "Vue.js", "Responsive Design", "Accessibility"],
     "demo": "interactives/likertscale-health/index.html"
   },
   {
     "title": "Peer Evaluation (Self & Peer with Analytics)",
     "description": "A robust peer evaluation tool that enables both self and peer assessments within groups. This interactive allows students to rate themselves and their peers on various criteria, with results visualized using Highcharts for clear, actionable insights. The system automatically calculates and displays group and individual averages, making it easy for instructors and students to identify strengths and areas for improvement. Designed for accessibility, responsive use, and seamless integration into eLearning environments.",
-  "images": ["/src/assets/images/peereval1.png", "/src/assets/images/peereval2.png", "/src/assets/images/peereval3.png"],
+  "images": ["/images/peereval1.png", "/images/peereval2.png", "/images/peereval3.png"],
     "tech": ["HTML5", "CSS3", "JavaScript", "Highcharts", "Accessibility", "Responsive Design"],
     "demo": "interactives/peereval/index.html"
   },
@@ -70,7 +70,7 @@
   {
     "title": "Scenario-Based Activity",
     "description": "Created an interactive activity where students explore scenario-specific content by clicking on scenarios. Each scenario includes a quiz, and students can view and print a summary of their responses and scores. All data is saved in a database for instructor analysis with visual charts.",
-  "images": ["/src/assets/images/Imagexl1.jpg", "/src/assets/images/Imagexl2.jpg", "/src/assets/images/Imagexl3.jpg"],
+  "images": ["/images/Imagexl1.jpg", "/images/Imagexl2.jpg", "/images/Imagexl3.jpg"],
     "tech": ["HTML5", "CSS3", "JavaScript", "LMS", "Responsive Design"],
     "video": "assets/videos/Program-Project-and-Portfolio-Management.webm"
   },
@@ -82,7 +82,7 @@
   {
     "title": "Drag-and-Drop Activity",
     "description": "Developed a drag-and-drop activity where students match terms to definitions. The activity provides instant feedback and saves results in a database for instructor review.",
-    "images": ["/src/assets/images/screenshot/dd1.png", "/src/assets/images/screenshot/dd2.png"],
+    "images": ["/images/screenshot/dd1.png", "/images/screenshot/dd2.png"],
     "tech": ["HTML5", "CSS3", "JavaScript", "LMS", "Responsive Design"],
     "demo": "interactives/dragndrop/index.html"
   }
