@@ -35,27 +35,31 @@
 </template>
 
 <script setup>
+import learncraftImg from '../assets/images/screenshot/learncraft.png'
+import pitstopImg from '../assets/images/screenshot/pitstop.png'
+import promptPrototyperImg from '../assets/images/screenshot/prompt-prototyper.png'
+
 const featured = [
   {
     title: 'LearnCraft — AI-Powered Learning Builder',
     description: 'LearnCraft is an AI-powered course creation platform that helps instructors and enterprise teams build structured learning content in minutes. It generates course outlines, lessons, quizzes, and learning paths using AI, supported by a clean, intuitive editor and seamless publishing to a branded LMS or marketplace.',
     tech: ['Vue.js', 'Node.js', 'Firebase', 'AI Integration'],
     url: 'https://learncraftedu.ca',
-    image: new URL('../assets/images/screenshot/learncraft.png', import.meta.url).href
+    image: learncraftImg
   },
   {
     title: 'Pitstop — Automotive Diagnostic App',
     description: 'Pitstop is a modern automotive service platform that connects drivers with certified mechanics in minutes. It offers guided diagnostics, instant matching with trusted technicians, appointment booking, and a mobile-first interface for managing repairs and bids — all built with a clean, responsive Vue.js front end.',
     tech: ['Vue.js', 'JavaScript'],
     url: 'https://pitstopservices.ca',
-    image: new URL('../assets/images/screenshot/pitstop.png', import.meta.url).href
+    image: pitstopImg
   },
   {
     title: 'AI Slide Prototyper',
     description: 'AI Slide Prototyper is an intelligent presentation builder that transforms ideas into interactive learning experiences. It lets creators design drag‑and‑drop slides, branching paths, quizzes, and games — all powered by AI for fast iteration and creative freedom. Built for educators, trainers, and teams who want presentations that feel alive and adaptive.',
     tech: ['Vue.js', 'JavaScript'],
     url: 'https://pp-ai-tool.mediasurf.ca',
-    image: new URL('../assets/images/screenshot/prompt-prototyper.png', import.meta.url).href
+    image: promptPrototyperImg
   }
 ];
 </script>
