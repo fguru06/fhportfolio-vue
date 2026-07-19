@@ -63,13 +63,6 @@
     "demo": "interactives/peereval/index.html"
   },
   {
-    "title": "Complex Survey Activity",
-    "description": "Designed a survey activity where students make multiple-choice selections, with data saved in a database. Students can revisit to view results displayed as bar graphs and pie charts using the Highcharts plugin.",
-  "images": ["/src/assets/images/Imagesup1.jpg", "/src/assets/images/Imagesup2.jpg", "/src/assets/images/Imagesup3.jpg"],
-    "tech": ["HTML5", "CSS3", "JavaScript", "LMS", "Responsive Design"],
-    "video": "assets/videos/Pediatric-Health-Promotions-and-Immunizations-Case-Scenarios.webm"
-  },
-  {
     "title": "Printable PDF Functionality for LMS",
     "description": "Developed a feature allowing students to print course content as PDFs. The feature crawls through interactive activities and extracts all content into a single print preview, enabling offline access to course materials.",
     "tech": ["HTML5", "CSS3", "JavaScript", "Accessibility", "Responsive Design"]
@@ -85,19 +78,6 @@
     "title": "Custom LMS Themes",
     "description": "Developed custom themes using JavaScript and CSS to align with partner branding, enhancing LMS customization and front-end development for educational institutions.",
     "tech": ["HTML5", "CSS3", "JavaScript", "LMS", "Responsive Design"]
-  },
-  {
-    "title": "Interactive Maps",
-    "description": "Implemented a click-and-reveal map feature where students click on states to display information. Used the Highcharts plugin for accessible and responsive maps.",
-  "images": ["/src/assets/images/Imagemap1.jpg", "/src/assets/images/Imagemap2.jpg", "/src/assets/images/Imagemap3.jpg"],
-    "tech": ["HTML5", "CSS3", "JavaScript", "Accessibility", "Responsive Design"],
-    "video": "assets/videos/Prescriptive-Authority-Websites.webm"
-  },
-  {
-    "title": "Interactive Presentation",
-    "description": "Created a presentation feature where students can explore scenarios through buttons, with each scenario displaying information in a tabbed format.",
-  "images": ["/src/assets/images/Imageru1.jpg", "/src/assets/images/Imageru2.jpg", "/src/assets/images/Imageru3.jpg"],
-    "tech": ["HTML5", "CSS3", "JavaScript", "Accessibility", "Responsive Design"]
   },
   {
     "title": "Drag-and-Drop Activity",

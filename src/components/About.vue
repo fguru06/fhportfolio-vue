@@ -23,11 +23,31 @@
   padding: 80px 20px;
 }
 .section-title {
-  font-size: 1.85rem;
-  font-weight: 700;
+  position: relative;
+  display: block;
+  width: fit-content;
+  padding: 0.85rem 2.4rem;
+  font-size: clamp(1.9rem, 2.3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--color-heading);
+  letter-spacing: -0.015em;
+  background: rgba(247, 249, 255, 0.92);
+  border-radius: 999px;
+  border: 1px solid rgba(76, 111, 255, 0.14);
+  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.1);
+  backdrop-filter: blur(14px);
+  isolation: isolate;
+  margin: 0 auto 32px;
   text-align: center;
-  margin-bottom: 32px;
-  color: var(--text);
+}
+.section-title::before {
+  content: '';
+  position: absolute;
+  inset: -30% -28%;
+  background: linear-gradient(135deg, rgba(76, 111, 255, 0.22) 0%, rgba(139, 92, 246, 0.16) 40%, rgba(34, 211, 238, 0.2) 100%);
+  border-radius: inherit;
+  z-index: -1;
+  filter: blur(14px);
 }
 
 .about-card {
@@ -55,7 +75,7 @@
 
 @media (max-width: 768px) {
   .section { padding: 50px 16px; }
-  .section-title { font-size: 1.5rem; }
+  .section-title { font-size: clamp(1.3rem, 4vw, 1.7rem); padding: 0.65rem 1.6rem; margin-bottom: 24px; }
   .about-card { padding: 24px 20px; }
   .about-card p { font-size: 0.95rem; }
 }

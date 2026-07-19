@@ -1,5 +1,5 @@
 <template>
-  <section id="featured" class="section">
+  <section id="featured" class="section reveal">
     <h2 class="section-title">Featured Projects</h2>
 
     <div class="featured-grid">
@@ -40,14 +40,14 @@ const featured = [
     title: 'LearnCraft — AI-Powered Learning Builder',
     description: 'LearnCraft is an AI-powered course creation platform that helps instructors and enterprise teams build structured learning content in minutes. It generates course outlines, lessons, quizzes, and learning paths using AI, supported by a clean, intuitive editor and seamless publishing to a branded LMS or marketplace.',
     tech: ['Vue.js', 'Node.js', 'Firebase', 'AI Integration'],
-    url: 'https://learncraft.mediasurf.ca',
+    url: 'https://learncraftedu.ca',
     image: new URL('../assets/images/screenshot/learncraft.png', import.meta.url).href
   },
   {
     title: 'Pitstop — Automotive Diagnostic App',
     description: 'Pitstop is a modern automotive service platform that connects drivers with certified mechanics in minutes. It offers guided diagnostics, instant matching with trusted technicians, appointment booking, and a mobile-first interface for managing repairs and bids — all built with a clean, responsive Vue.js front end.',
     tech: ['Vue.js', 'JavaScript'],
-    url: 'https://pitstop.mediasurf.ca',
+    url: 'https://pitstopservices.ca',
     image: new URL('../assets/images/screenshot/pitstop.png', import.meta.url).href
   },
   {
@@ -56,13 +56,6 @@ const featured = [
     tech: ['Vue.js', 'JavaScript'],
     url: 'https://pp-ai-tool.mediasurf.ca',
     image: new URL('../assets/images/screenshot/prompt-prototyper.png', import.meta.url).href
-  },
-  {
-    title: 'Emergency Department HIS Module',
-    description: 'A fully interactive hospital information system training module that simulates Emergency Department workflows. Learners navigate real-world scenarios, make decisions, and follow guided steps through a clean, accessible interface designed for enterprise healthcare training.',
-    tech: ['Storyline', 'JavaScript'],
-    url: null,
-    image: new URL('../assets/images/screenshot/mc1.png', import.meta.url).href
   }
 ];
 </script>
@@ -74,11 +67,31 @@ const featured = [
   padding: 80px 20px;
 }
 .section-title {
-  font-size: 1.85rem;
-  font-weight: 700;
+  position: relative;
+  display: block;
+  width: fit-content;
+  padding: 0.85rem 2.4rem;
+  font-size: clamp(1.9rem, 2.3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--color-heading);
+  letter-spacing: -0.015em;
+  background: rgba(247, 249, 255, 0.92);
+  border-radius: 999px;
+  border: 1px solid rgba(76, 111, 255, 0.14);
+  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.1);
+  backdrop-filter: blur(14px);
+  isolation: isolate;
+  margin: 0 auto 36px;
   text-align: center;
-  margin-bottom: 36px;
-  color: var(--text);
+}
+.section-title::before {
+  content: '';
+  position: absolute;
+  inset: -30% -28%;
+  background: linear-gradient(135deg, rgba(76, 111, 255, 0.22) 0%, rgba(139, 92, 246, 0.16) 40%, rgba(34, 211, 238, 0.2) 100%);
+  border-radius: inherit;
+  z-index: -1;
+  filter: blur(14px);
 }
 
 .featured-grid {

@@ -32,6 +32,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const links = [
   { label: 'About', href: '#about' },
   { label: 'Why Me', href: '#why-hire-me' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Featured', href: '#featured' },
   { label: 'Projects', href: '#projects' },
   { label: 'Skills', href: '#skills' },
